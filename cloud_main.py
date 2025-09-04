@@ -169,12 +169,12 @@ if __name__ == '__main__':
     scheduler_thread = threading.Thread(target=run_scheduler, daemon=True)
     scheduler_thread.start()
     
-    # Get port from environment (Railway, Heroku, etc. set this)
+    # Get port from environment (Railway sets this automatically)
     port = int(os.environ.get('PORT', 8080))
     
     print(f"🌐 Starting web server on port {port}")
     print(f"📱 Telegram alerts configured for chat ID: {load_config().get('telegram_chat_id', 'Not configured')}")
     print(f"💹 Monitoring: {load_config().get('index_symbol', 'BTC-USD')}")
     
-    # Start Flask app
+    # Start Flask app (Railway handles the PORT automatically)
     app.run(host='0.0.0.0', port=port, debug=False)
