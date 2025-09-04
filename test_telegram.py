@@ -7,7 +7,7 @@ import json
 
 # Your bot configuration
 BOT_TOKEN = "8381873587:AAEjpFNgDAqf46W6k3fle03fJzkUjwHIfCY"
-CHAT_ID = "401420432"
+CHAT_ID = "1311303963"
 
 def test_bot_info():
     """Test if bot token is valid"""

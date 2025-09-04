@@ -37,11 +37,12 @@ async def main():
     """Main function to run the bot"""
     print("🚀 Starting Telegram Chat ID finder...")
     print(f"🤖 Bot Token: {BOT_TOKEN[:10]}...")
+    print(f"🤖 Bot Username: @btctradealertttttsbot")
     print("\n📱 INSTRUCTIONS:")
     print("1. Open Telegram")
-    print("2. Search for your bot using the token above")
-    print("3. Start a conversation with your bot")
-    print("4. Send any message to your bot")
+    print("2. Search for: @btctradealertttttsbot")
+    print("3. Click on the bot and start conversation")
+    print("4. Send any message (like 'hello' or '/start')")
     print("5. Your Chat ID will appear here\n")
     print("⏳ Waiting for messages...")
     

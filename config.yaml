@@ -1,6 +1,6 @@
 # Telegram Configuration
 telegram_bot_token: "8381873587:AAEjpFNgDAqf46W6k3fle03fJzkUjwHIfCY"
-telegram_chat_id: "401420432"  # Updated chat ID
+telegram_chat_id: "1311303963"  # Correct working chat ID
 
 # Bitcoin Trading Configuration
 use_weekly_options: true  # Set to true for weekly options, false for monthly
