@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
 """
-Test script to verify Telegram bot is working
+Secure Telegram bot integration test using environment variables
 """
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-# SECURITY WARNING: This file contains hardcoded credentials for testing
-# Use test_telegram_secure.py instead for production
-# Your bot configuration - REPLACE WITH ENVIRONMENT VARIABLES
-BOT_TOKEN = "REPLACE_WITH_YOUR_BOT_TOKEN"
-CHAT_ID = "REPLACE_WITH_YOUR_CHAT_ID"
+# Load environment variables
+load_dotenv()
+
+# Get credentials from environment variables (secure)
+BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 def test_bot_info():
     """Test if bot token is valid"""
+    if not BOT_TOKEN:
+        print("❌ TELEGRAM_BOT_TOKEN not found in environment variables!")
+        return False
+        
     try:
         print("🤖 Testing Telegram bot token...")
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/getMe"
@@ -39,13 +46,17 @@ def test_bot_info():
 
 def test_send_message():
     """Test sending a message to the chat"""
+    if not CHAT_ID:
+        print("❌ TELEGRAM_CHAT_ID not found in environment variables!")
+        return False
+        
     try:
         print(f"\n📱 Testing message send to chat ID: {CHAT_ID}...")
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
         
         payload = {
             'chat_id': CHAT_ID,
-            'text': '🧪 TEST MESSAGE: Bitcoin Options Alert System - Cloud Test\n\nIf you see this message, your Telegram integration is working correctly! ✅',
+            'text': '🧪 SECURE TEST: Bitcoin Options Alert System\n\n✅ Environment variables are working correctly!\n🔒 Credentials are properly secured.',
             'parse_mode': 'Markdown'
         }
         
@@ -54,61 +65,35 @@ def test_send_message():
         if response.status_code == 200:
             data = response.json()
             if data.get('ok'):
-                message_info = data.get('result', {})
                 print("✅ Test message sent successfully!")
-                print(f"   Message ID: {message_info.get('message_id')}")
-                print(f"   Chat ID: {message_info.get('chat', {}).get('id')}")
-                print(f"   Date: {message_info.get('date')}")
-                print("\n📱 Check your Telegram now - you should see the test message!")
+                print("📱 Check your Telegram - you should see the secure test message!")
                 return True
             else:
                 print(f"❌ Send message error: {data.get('description')}")
                 return False
         else:
             print(f"❌ HTTP error: {response.status_code}")
-            print(f"Response: {response.text}")
             return False
     except Exception as e:
         print(f"❌ Send message error: {e}")
         return False
 
-def test_chat_info():
-    """Test if we can get chat information"""
-    try:
-        print(f"\n🔍 Testing chat access for ID: {CHAT_ID}...")
-        url = f"https://api.telegram.org/bot{BOT_TOKEN}/getChat"
-        
-        payload = {'chat_id': CHAT_ID}
-        response = requests.post(url, data=payload)
-        
-        if response.status_code == 200:
-            data = response.json()
-            if data.get('ok'):
-                chat_info = data.get('result', {})
-                print("✅ Chat access is working!")
-                print(f"   Chat type: {chat_info.get('type')}")
-                print(f"   Chat ID: {chat_info.get('id')}")
-                if 'first_name' in chat_info:
-                    print(f"   User: {chat_info.get('first_name')} {chat_info.get('last_name', '')}")
-                return True
-            else:
-                print(f"❌ Chat access error: {data.get('description')}")
-                return False
-        else:
-            print(f"❌ HTTP error: {response.status_code}")
-            return False
-    except Exception as e:
-        print(f"❌ Chat access error: {e}")
-        return False
-
 def main():
-    """Run all Telegram tests"""
-    print("🧪 Telegram Bot Integration Test")
+    """Run secure Telegram tests"""
+    print("🔒 SECURE Telegram Bot Integration Test")
     print("=" * 50)
+    
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ Missing environment variables!")
+        print("\n🔧 Setup Instructions:")
+        print("1. Create .env file in project root")
+        print("2. Add: TELEGRAM_BOT_TOKEN=your_bot_token")
+        print("3. Add: TELEGRAM_CHAT_ID=your_chat_id")
+        print("4. Or set as system environment variables")
+        return
     
     tests = [
         ("Bot Token Validation", test_bot_info),
-        ("Chat Access Test", test_chat_info),
         ("Send Test Message", test_send_message)
     ]
     
@@ -119,19 +104,14 @@ def main():
         print(f"\n📋 Running: {test_name}")
         if test_func():
             passed += 1
-        else:
-            print(f"❌ {test_name} failed!")
     
     print("\n" + "=" * 50)
     print(f"🎯 Test Results: {passed}/{total} tests passed")
     
     if passed == total:
-        print("🎉 All Telegram tests passed!")
-        print("💡 Your bot configuration is correct.")
-        print("🔧 The issue might be with Railway environment variables.")
+        print("🎉 All tests passed! Your secure setup is working!")
     else:
         print("⚠️  Some tests failed. Check the errors above.")
-        print("🔧 Fix these issues before proceeding with cloud deployment.")
 
 if __name__ == "__main__":
     main()

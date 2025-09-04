@@ -1,6 +1,7 @@
-# Telegram Configuration
-telegram_bot_token: "8381873587:AAEjpFNgDAqf46W6k3fle03fJzkUjwHIfCY"
-telegram_chat_id: "1311303963"  # Correct working chat ID
+# Telegram Configuration - Using Environment Variables for Security
+# Set these in Railway dashboard or your .env file locally
+# telegram_bot_token: Will be read from TELEGRAM_BOT_TOKEN environment variable
+# telegram_chat_id: Will be read from TELEGRAM_CHAT_ID environment variable
 
 # Bitcoin Trading Configuration
 use_weekly_options: true  # Set to true for weekly options, false for monthly

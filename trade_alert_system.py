@@ -11,14 +11,31 @@ from utils.fetch_intraday import fetch_bitcoin_intraday
 from utils.fetch_option_chain import fetch_option_chain
 from utils.indicators import add_technical_indicators
 from merge_data import prepare_merged_data
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Load configuration
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
 
+# Get Telegram credentials from environment variables (secure)
+bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+chat_id = os.getenv('TELEGRAM_CHAT_ID')
+
+# Fallback to config file for non-sensitive settings
+if not bot_token:
+    bot_token = config.get('telegram_bot_token')
+if not chat_id:
+    chat_id = config.get('telegram_chat_id')
+
+if not bot_token or not chat_id:
+    print("⚠️  WARNING: Telegram credentials not found in environment variables or config!")
+    print("Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.")
+
 # Initialize Telegram bot
-bot = Bot(token=config['telegram_bot_token'])
-chat_id = config['telegram_chat_id']
+bot = Bot(token=bot_token) if bot_token else None
 
 # Load the trained model and preprocessing components
 def load_model():

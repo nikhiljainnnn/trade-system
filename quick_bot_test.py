@@ -1,16 +1,30 @@
 #!/usr/bin/env python3
 """
 Quick test to verify bot is working and get updates
+SECURITY WARNING: Uses config file - should use environment variables
 """
 import requests
 import json
-import yaml
+import os
+from dotenv import load_dotenv
 
-# Load configuration
-with open('config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
+# Load environment variables
+load_dotenv()
 
-BOT_TOKEN = config['telegram_bot_token']
+# Try to get from environment variables first (secure)
+BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+
+# Fallback to config file (not recommended for production)
+if not BOT_TOKEN:
+    try:
+        import yaml
+        with open('config.yaml', 'r') as file:
+            config = yaml.safe_load(file)
+        BOT_TOKEN = config.get('telegram_bot_token')
+        print("⚠️  Using config file for bot token - use environment variables for security!")
+    except:
+        print("❌ No bot token found in environment variables or config file!")
+        BOT_TOKEN = None
 
 def get_bot_updates():
     """Get recent updates/messages sent to the bot"""

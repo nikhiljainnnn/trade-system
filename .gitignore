@@ -56,3 +56,13 @@ data/last_successful_data.pkl
 
 # Environment variables (create separate for cloud)
 .env
+.env.local
+.env.production
+.env.staging
+config_local.yaml
+*_secret.py
+*_secrets.yaml
+
+# Test files with credentials (should use environment variables)
+test_telegram_local.py
+quick_bot_test_local.py

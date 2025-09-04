@@ -5,6 +5,10 @@ import threading
 from flask import Flask, jsonify, request
 from datetime import datetime
 import yaml
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Import your existing modules
 from trade_alert_system import generate_signals, send_alert
