@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local files
+alerts.log
+*.log
+*.bak
+*.tmp
+
+# Windows specific files (not needed for cloud)
+*.bat
+setup_simple_scheduler.ps1
+setup_task_scheduler.ps1
+run_btc_alerts.bat
+
+# Local data that might be large
+data/last_successful_data.pkl
+
+# Environment variables (create separate for cloud)
+.env

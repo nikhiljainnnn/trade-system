@@ -1,0 +1,40 @@
+# Telegram Configuration
+telegram_bot_token: "8384335593:AAH1-08L5Kno5_LCMEFLkLGXKbIThVIcqzQ"
+telegram_chat_id: "490921395"  # To get your chat ID: message @userinfobot on Telegram
+
+# Bitcoin Trading Configuration
+use_weekly_options: true  # Set to true for weekly options, false for monthly
+weekly_expiry_day: "friday"  # Day of the week for weekly expiry (friday is standard for Bitcoin options)
+strike_gap: 1000  # Bitcoin options typically have wider strike gaps
+index_symbol: "BTC-USD"
+index_name: "BITCOIN"
+fetch_interval: 10  # in minutes (reduced to prevent rate limiting)
+signal_confidence_threshold: 85  # Minimum confidence percentage for 90%+ accuracy target
+option_type: "both"  # Options: "call", "put", or "both" for trading signals
+crypto_exchange: "deribit"  # Exchange for Bitcoin options data
+
+# Rate Limiting Configuration
+api_rate_limit_delay: 5  # Seconds between API calls
+max_retries: 3  # Maximum API retry attempts
+retry_delay: 10  # Seconds between retries
+
+# Data Fetching Configuration
+use_multiple_data_sources: true  # Use multiple APIs for better data reliability
+data_fetch_interval: "5m"  # Data granularity: "1m", "5m", "15m", "30m", "1h"
+data_lookback_period: "2d"  # How much historical data to fetch
+
+# Advanced Trading Settings
+limit_trading_hours: false  # true to limit alerts to specific hours, false for 24/7
+max_daily_alerts: 10  # Maximum alerts per day to avoid spam
+min_volume_threshold: 50  # Minimum option volume to consider
+min_open_interest: 100  # Minimum open interest to consider
+volatility_threshold: 0.03  # Minimum price movement threshold (3% for Bitcoin)
+min_profit_threshold: 0.25  # Minimum 25% profit threshold for option signals
+high_confidence_threshold: 0.50  # 50% profit for high confidence signals
+
+# Model Training Configuration
+model_lookback_days: 30  # Days of historical data for training
+feature_engineering_enabled: true
+ensemble_models: true  # Use multiple models for higher accuracy
+backtest_enabled: true
+min_accuracy_threshold: 0.88  # Minimum model accuracy before deployment
