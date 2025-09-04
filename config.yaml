@@ -1,6 +1,6 @@
 # Telegram Configuration
-telegram_bot_token: "8384335593:AAH1-08L5Kno5_LCMEFLkLGXKbIThVIcqzQ"
-telegram_chat_id: "490921395"  # To get your chat ID: message @userinfobot on Telegram
+telegram_bot_token: "8381873587:AAEjpFNgDAqf46W6k3fle03fJzkUjwHIfCY"
+telegram_chat_id: "401420432"  # Updated chat ID
 
 # Bitcoin Trading Configuration
 use_weekly_options: true  # Set to true for weekly options, false for monthly
